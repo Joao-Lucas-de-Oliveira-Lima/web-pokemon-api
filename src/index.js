@@ -1,8 +1,10 @@
 const express = require("express");
-const connectToDatabase = require("./db/database");
+const connectToDatabase = require("./config/database");
+const pokemonRouter = require("./router/pokemonRoutes");
 
 const app = express();
-const port = 3000;
+app.use(express.json());
+const port = process.env.SERVER_PORT;
 
 async function startApplication(){
 
@@ -11,15 +13,12 @@ async function startApplication(){
     if(isConnected){
 
         app.listen(port, () => {
-            console.log(`Servidor rodando na porta ${port}`);
+            console.log(`Server running on port ${port}`);
         });
 
-        app.get("/", (req, res) => {
-            res.send("Hello World");
-        })
+        app.use("/api", pokemonRouter);
     }
 
 }
-
 
 startApplication();

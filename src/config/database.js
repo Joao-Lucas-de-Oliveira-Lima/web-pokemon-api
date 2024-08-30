@@ -7,10 +7,10 @@ const mongoURL = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS
 async function connectToDatabase() {
     try{
         await mongoose.connect(mongoURL);
-        console.log("Conectado com sucesso ao banco MongoDB");
+        console.log("Successfully connected to the database MongoDB");
         return true;
     }catch(error){
-        console.error('Erro ao conectar ao MongoDB:', error.message);
+        console.error('Error connecting to MongoDB:', error.message);
         return false;
     }
 }
